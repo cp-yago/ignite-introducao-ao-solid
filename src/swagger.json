@@ -1,0 +1,221 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "(Ignite) Desafio 02 - Documentando com Swagger",
+    "description": "Documentação desenvolvida para consolidar meu aprendizado de documentação utilizando a ferramenta swagger.",
+    "contact": {
+      "name": "Yago Cunha",
+      "email": "yago.cunha123@gmail.com",
+      "url": "https://github.com/cp-yago"
+    },
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/users": {
+      "summary": "Sumário da rota de usuários",
+      "description": "Descrição criativa da rota de usuários",
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "sumarry": "Create User",
+        "description": "Create a new User",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Yago Cunha",
+                  "email": "yago.cunha123@gmail.com"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "User already exists!"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "List all users",
+        "description": "List all users",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+              "description": "Sucess",
+              "content": {
+                  "application/json": {
+                      "schema": {
+                          "type": "array",
+                          "items": {
+                              "type": "object",
+                              "properties": {
+                                  "id": {
+                                      "type": "string"
+                                  },
+                                  "name": {
+                                      "type": "string"
+                                  },
+                                  "email": {
+                                      "type": "string"
+                                  },
+                                  "created_at": {
+                                      "type": "string"
+                                  },
+                                  "updated_at": {
+                                      "type": "string"
+                                  },
+                                  "admin": {
+                                      "type": "boolean"
+                                  }
+                              }
+                          }
+                      }
+                  }
+              }
+          },
+          "400": {
+              "description": "User is not ADMIN!"
+          }
+        }
+      }
+    },
+    "/users/{user_id}/": {
+      "get": {
+        "tags": [
+            "User"
+        ],
+        "summary": "Show User Profile",
+        "description": "Show User Profile",
+        "parameters": [
+            {
+                "name": "user_id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "format": "uuid"
+                }
+            }
+        ],
+        "responses": {
+            "200": {
+                "description": "Sucess",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                },
+                                "email": {
+                                    "type": "string"
+                                },
+                                "created_at": {
+                                    "type": "string"
+                                },
+                                "updated_at": {
+                                    "type": "string"
+                                },
+                                "admin": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "404": {
+                "description": "User is not found!"
+            }
+        }
+    }
+    },
+    "/users/{user_id}/admin":{
+      "patch": {
+        "tags": [
+            "User"
+        ],
+        "summary": "Turn User Admin",
+        "description": "Turn User Admin",
+        "parameters": [
+            {
+                "name": "user_id",
+                "in": "path",
+                "required": true,
+                "schema": {
+                    "type": "string",
+                    "format": "uuid"
+                }
+            }
+        ],
+        "responses": {
+            "200": {
+                "description": "Sucess",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                },
+                                "email": {
+                                    "type": "string"
+                                },
+                                "created_at": {
+                                    "type": "string"
+                                },
+                                "updated_at": {
+                                    "type": "string"
+                                },
+                                "admin": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "404": {
+                "description": "User is already admin!"
+            }
+        }
+    }
+    }
+  }
+}
